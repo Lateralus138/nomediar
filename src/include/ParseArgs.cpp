@@ -20,20 +20,23 @@ namespace ParseArgs
           std::string switch_ = string_.substr(2);
           if (switch_.empty())
           {
-            try
-            {
-              exitcode_.code = 190;
-              exitcode_.what = "No switch provided with '--'.";
-              throw exitcode_;
-            }
-            catch (ExitCode &ecode)
-            {
-              if (!options_.isQuiet)
-              {
-                std::cerr << ecode.what << '\n';
-              }
-              std::exit(ecode.code);
-            }
+            exitcode_.code = 190;
+            exitcode_.what = "No switch provided with '--'.";
+            try_catch_exit(exitcode_, options_.isQuiet);
+            // try
+            // {
+            //   exitcode_.code = 190;
+            //   exitcode_.what = "No switch provided with '--'.";
+            //   throw exitcode_;
+            // }
+            // catch (ExitCode &ecode)
+            // {
+            //   if (!options_.isQuiet)
+            //   {
+            //     std::cerr << ecode.what << '\n';
+            //   }
+            //   std::exit(ecode.code);
+            // }
           }
           const std::string lower = to_lower(switch_);
           if (lower == "help")
@@ -54,20 +57,23 @@ namespace ParseArgs
           std::string switch_ = string_.substr(1);
           if (switch_.empty())
           {
-            try
-            {
-              exitcode_.code = 191;
-              exitcode_.what = "No switch provided with '-'.";
-              throw exitcode_;
-            }
-            catch (ExitCode &ecode)
-            {
-              if (!options_.isQuiet)
-              {
-                std::cerr << ecode.what << '\n';
-              }
-              std::exit(ecode.code);
-            }
+            exitcode_.code = 191;
+            exitcode_.what = "No switch provided with '-'.";
+            try_catch_exit(exitcode_, options_.isQuiet);
+            // try
+            // {
+            //   exitcode_.code = 191;
+            //   exitcode_.what = "No switch provided with '-'.";
+            //   throw exitcode_;
+            // }
+            // catch (ExitCode &ecode)
+            // {
+            //   if (!options_.isQuiet)
+            //   {
+            //     std::cerr << ecode.what << '\n';
+            //   }
+            //   std::exit(ecode.code);
+            // }
           }
           const std::string lower = to_lower(switch_);
           if (lower == "h")
@@ -114,5 +120,22 @@ namespace ParseArgs
     }
     lower[stringLength] = '\0';
     return lower.c_str();
+  }
+  void try_catch_exit(ExitCode & exitcode_, bool isQuiet)
+  {
+    try
+    {
+      exitcode_.code = 190;
+      exitcode_.what = "No switch provided with '--'.";
+      throw exitcode_;
+    }
+    catch (ExitCode &ecode)
+    {
+      if (!isQuiet)
+      {
+        std::cerr << ecode.what << '\n';
+      }
+      std::exit(ecode.code);
+    }
   }
 };

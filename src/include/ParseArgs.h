@@ -18,5 +18,6 @@ namespace ParseArgs
 {
   extern void Parse(int argc, const char *argv[], Options &options_, ExitCode & exitcode_);
   extern std::string to_lower(std::string anyCaseString);
+  extern void try_catch_exit(ExitCode &exitcode_, bool isQuiet);
 };
 #endif
