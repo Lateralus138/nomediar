@@ -44,8 +44,9 @@ namespace ParseArgs
           {
             options_.doDelete = true;
           }
+          continue;
         }
-        else if (string_.substr(0, 1) == "-")
+        if (string_.substr(0, 1) == "-")
         {
           std::string switch_ = string_.substr(1);
           if (switch_.empty())
@@ -67,15 +68,16 @@ namespace ParseArgs
           {
             options_.doDelete = true;
           }
+          continue;
         }
-        else
-        {
+        // else
+        // {
           if (!newStr.empty())
           {
             newStr.push_back(' ');
           }
           newStr.append(string_);
-        }
+        // }
         // if (isHelp)
         // {
         //   // TODO Work on help messsage
