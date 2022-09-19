@@ -3,11 +3,18 @@
 #include <iostream>
 namespace ParseArgs
 {
-  void Parse(int argc, const char *argv[], Options &options_, ExitCode &exitcode_)
+  void SetDefualtOptions(Options & options_)
   {
     options_.isQuiet = false;
     options_.doDelete = false;
     options_.pathStr = ".";
+  }
+  void Parse(int argc, const char *argv[], Options &options_, ExitCode &exitcode_)
+  {
+    SetDefualtOptions(options_);
+    // options_.isQuiet = false;
+    // options_.doDelete = false;
+    // options_.pathStr = ".";
     if (argc > 1)
     {
       bool isHelp = false;
@@ -23,20 +30,6 @@ namespace ParseArgs
             exitcode_.code = 190;
             exitcode_.what = "No switch provided with '--'.";
             try_catch_exit(exitcode_, options_.isQuiet);
-            // try
-            // {
-            //   exitcode_.code = 190;
-            //   exitcode_.what = "No switch provided with '--'.";
-            //   throw exitcode_;
-            // }
-            // catch (ExitCode &ecode)
-            // {
-            //   if (!options_.isQuiet)
-            //   {
-            //     std::cerr << ecode.what << '\n';
-            //   }
-            //   std::exit(ecode.code);
-            // }
           }
           const std::string lower = to_lower(switch_);
           if (lower == "help")
@@ -60,20 +53,6 @@ namespace ParseArgs
             exitcode_.code = 191;
             exitcode_.what = "No switch provided with '-'.";
             try_catch_exit(exitcode_, options_.isQuiet);
-            // try
-            // {
-            //   exitcode_.code = 191;
-            //   exitcode_.what = "No switch provided with '-'.";
-            //   throw exitcode_;
-            // }
-            // catch (ExitCode &ecode)
-            // {
-            //   if (!options_.isQuiet)
-            //   {
-            //     std::cerr << ecode.what << '\n';
-            //   }
-            //   std::exit(ecode.code);
-            // }
           }
           const std::string lower = to_lower(switch_);
           if (lower == "h")
