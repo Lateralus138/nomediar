@@ -76,12 +76,18 @@ namespace ParseArgs
           }
           newStr.append(string_);
         }
-        if (isHelp)
-        {
-          // TODO Work on help messsage
-          std::cout << "HELP\n";
-          std::exit(EXIT_SUCCESS);
-        }
+        // if (isHelp)
+        // {
+        //   // TODO Work on help messsage
+        //   std::cout << "HELP\n";
+        //   std::exit(EXIT_SUCCESS);
+        // }
+      }
+      if (isHelp)
+      {
+        // TODO Work on help messsage
+        std::cout << "HELP\n";
+        std::exit(EXIT_SUCCESS);
       }
       if (!newStr.empty())
       {
