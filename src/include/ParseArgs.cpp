@@ -12,9 +12,6 @@ namespace ParseArgs
   void Parse(int argc, const char *argv[], Options &options_, ExitCode &exitcode_)
   {
     SetDefualtOptions(options_);
-    // options_.isQuiet = false;
-    // options_.doDelete = false;
-    // options_.pathStr = ".";
     if (argc > 1)
     {
       bool isHelp = false;
@@ -35,18 +32,6 @@ namespace ParseArgs
           isHelp = (lower == "help");
           options_.isQuiet = (lower == "quiet");
           options_.doDelete = (lower == "delete");
-          // if (lower == "help")
-          // {
-          //   isHelp = true;
-          // }
-          // if (lower == "quiet")
-          // {
-          //   options_.isQuiet = true;
-          // }
-          // if (lower == "delete")
-          // {
-          //   options_.doDelete = true;
-          // }
           continue;
         }
         if (string_.substr(0, 1) == "-")
@@ -62,18 +47,6 @@ namespace ParseArgs
           isHelp = (lower == "h");
           options_.isQuiet = (lower == "q");
           options_.doDelete = (lower == "d");
-          // if (lower == "h")
-          // {
-          //   isHelp = true;
-          // }
-          // if (lower == "q")
-          // {
-          //   options_.isQuiet = true;
-          // }
-          // if (lower == "d")
-          // {
-          //   options_.doDelete = true;
-          // }
           continue;
         }
         if (!newStr.empty())
