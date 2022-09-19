@@ -9,72 +9,6 @@
 #include <filesystem>
 #include <fstream>
 #include "ParseArgs.h"
-void try_create_nomedia(const std::filesystem::directory_entry & entry, Options & options)
-{
-  try
-  {
-    if (std::filesystem::is_empty(entry.path()))
-    {
-      std::filesystem::path temp = entry;
-      temp /= ".nomedia";
-      std::ofstream tempStream(temp.native());
-      if (tempStream.is_open())
-      {
-        tempStream.close();
-        if (!options.isQuiet)
-        {
-          std::cout << temp << " created successfully." << std::endl;
-        }
-      }
-      else
-      {
-        if (!options.isQuiet)
-        {
-          std::cerr << "Could not create " << temp << std::endl;
-        }
-      }
-    }
-  }
-  catch (std::filesystem::filesystem_error &ferr)
-  {
-    if (!options.isQuiet)
-    {
-      std::cerr << "[" << ferr.code().value() << "] " << ferr.what() << '\n';
-    }
-  }
-}
-void try_delete_nomedia(const std::filesystem::directory_entry & entry, Options & options)
-{
-  std::filesystem::path temp = entry;
-  try
-  {
-    if (temp.filename() == ".nomedia")
-    {
-      try
-      {
-        std::filesystem::remove(temp);
-        if (!options.isQuiet)
-        {
-          std::cout << temp << " deleted successfully.\n";
-        }
-      }
-      catch (std::filesystem::filesystem_error &ferr)
-      {
-        if (!options.isQuiet)
-        {
-          std::cerr << "[" << ferr.code().value() << "] " << ferr.what() << '\n';
-        }
-      }
-    }
-  }
-  catch (std::filesystem::filesystem_error &ferr)
-  {
-    if (!options.isQuiet)
-    {
-      std::cerr << "[" << ferr.code().value() << "] " << ferr.what() << '\n';
-    }
-  }
-}
 int main(int argc, const char *argv[])
 {
   // TODO Parse arguments, finish HELP message
@@ -91,38 +25,7 @@ int main(int argc, const char *argv[])
         {
           if (entry.is_directory())
           {
-            try_create_nomedia(entry, options);
-            // try
-            // {
-            //   if (std::filesystem::is_empty(entry.path()))
-            //   {
-            //     std::filesystem::path temp = entry;
-            //     temp /= ".nomedia";
-            //     std::ofstream tempStream(temp.native());
-            //     if (tempStream.is_open())
-            //     {
-            //       tempStream.close();
-            //       if (!options.isQuiet)
-            //       {
-            //         std::cout << temp << " created successfully." << std::endl;
-            //       }
-            //     }
-            //     else
-            //     {
-            //       if (!options.isQuiet)
-            //       {
-            //         std::cerr << "Could not create " << temp << std::endl;
-            //       }
-            //     }
-            //   }
-            // }
-            // catch (std::filesystem::filesystem_error &ferr)
-            // {
-            //   if (!options.isQuiet)
-            //   {
-            //     std::cerr << "[" << ferr.code().value() << "] " << ferr.what() << '\n';
-            //   }
-            // }
+            TryNomedia::try_create_nomedia(entry, options);
           }
         }
         catch (std::filesystem::filesystem_error &ferr)
@@ -143,36 +46,7 @@ int main(int argc, const char *argv[])
             {
               if (std::filesystem::is_empty(entry.path()))
               {
-                try_delete_nomedia(entry, options);
-                // std::filesystem::path temp = entry;
-                // try
-                // {
-                //   if (temp.filename() == ".nomedia")
-                //   {
-                //     try
-                //     {
-                //       std::filesystem::remove(temp);
-                //       if (!options.isQuiet)
-                //       {
-                //         std::cout << temp << " deleted successfully.\n";
-                //       }
-                //     }
-                //     catch (std::filesystem::filesystem_error &ferr)
-                //     {
-                //       if (!options.isQuiet)
-                //       {
-                //         std::cerr << "[" << ferr.code().value() << "] " << ferr.what() << '\n';
-                //       }
-                //     }
-                //   }
-                // }
-                // catch (std::filesystem::filesystem_error &ferr)
-                // {
-                //   if (!options.isQuiet)
-                //   {
-                //     std::cerr << "[" << ferr.code().value() << "] " << ferr.what() << '\n';
-                //   }
-                // }
+                TryNomedia::try_delete_nomedia(entry, options);
               }
             }
             catch (std::filesystem::filesystem_error &ferr)
