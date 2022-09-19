@@ -68,7 +68,6 @@ int main(int argc, const char *argv[])
       }
       else
       {
-
         try
         {
           if (entry.is_regular_file())
@@ -124,7 +123,6 @@ int main(int argc, const char *argv[])
             std::cerr << "[" << ferr.code().value() << "] " << ferr.what() << '\n';
           }
         }
-
       }
     }
   }
