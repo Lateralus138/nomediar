@@ -70,20 +70,11 @@ namespace ParseArgs
           }
           continue;
         }
-        // else
-        // {
-          if (!newStr.empty())
-          {
-            newStr.push_back(' ');
-          }
-          newStr.append(string_);
-        // }
-        // if (isHelp)
-        // {
-        //   // TODO Work on help messsage
-        //   std::cout << "HELP\n";
-        //   std::exit(EXIT_SUCCESS);
-        // }
+        if (!newStr.empty())
+        {
+          newStr.push_back(' ');
+        }
+        newStr.append(string_);
       }
       if (isHelp)
       {
@@ -91,10 +82,8 @@ namespace ParseArgs
         std::cout << "HELP\n";
         std::exit(EXIT_SUCCESS);
       }
-      if (!newStr.empty())
-      {
-        options_.pathStr = newStr;
-      }
+
+      options_.pathStr = (!newStr.empty()?newStr:options_.pathStr);
     }
   }
   std::string to_lower(std::string anyCaseString)
