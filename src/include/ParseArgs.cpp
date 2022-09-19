@@ -32,18 +32,21 @@ namespace ParseArgs
             try_catch_exit(exitcode_, options_.isQuiet);
           }
           const std::string lower = to_lower(switch_);
-          if (lower == "help")
-          {
-            isHelp = true;
-          }
-          if (lower == "quiet")
-          {
-            options_.isQuiet = true;
-          }
-          if (lower == "delete")
-          {
-            options_.doDelete = true;
-          }
+          isHelp = (lower == "help");
+          options_.isQuiet = (lower == "quiet");
+          options_.doDelete = (lower == "delete");
+          // if (lower == "help")
+          // {
+          //   isHelp = true;
+          // }
+          // if (lower == "quiet")
+          // {
+          //   options_.isQuiet = true;
+          // }
+          // if (lower == "delete")
+          // {
+          //   options_.doDelete = true;
+          // }
           continue;
         }
         if (string_.substr(0, 1) == "-")
@@ -56,18 +59,21 @@ namespace ParseArgs
             try_catch_exit(exitcode_, options_.isQuiet);
           }
           const std::string lower = to_lower(switch_);
-          if (lower == "h")
-          {
-            isHelp = true;
-          }
-          if (lower == "q")
-          {
-            options_.isQuiet = true;
-          }
-          if (lower == "d")
-          {
-            options_.doDelete = true;
-          }
+          isHelp = (lower == "h");
+          options_.isQuiet = (lower == "q");
+          options_.doDelete = (lower == "d");
+          // if (lower == "h")
+          // {
+          //   isHelp = true;
+          // }
+          // if (lower == "q")
+          // {
+          //   options_.isQuiet = true;
+          // }
+          // if (lower == "d")
+          // {
+          //   options_.doDelete = true;
+          // }
           continue;
         }
         if (!newStr.empty())
@@ -82,7 +88,6 @@ namespace ParseArgs
         std::cout << "HELP\n";
         std::exit(EXIT_SUCCESS);
       }
-
       options_.pathStr = (!newStr.empty()?newStr:options_.pathStr);
     }
   }
